@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_URL}/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  application:
+    name: async-statistic
+
+  kafka:
+    bootstrap-servers: pkc-12576z.us-west2.gcp.confluent.cloud:9092
+    listener:
+      ack-mode: manual_immediate
+    topic:
+      cloud-update-statistics: cloud-update-statistics
+
+    properties:
+      ssl.endpoint.identification.algorithm: https
+      sasl.mechanism: PLAIN
+      request.timeout.ms: 3000
+      security.protocol: SASL_SSL
+      retry.backoff.ms: 500
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='RFGZR73WZNZIJSWC' password='ZQmuSzW2lQ4WqcUGv7IGrrd7TeNdtvC8LhNWlwEDlLn9gtxySrLj67s5TFYKW+a9';
+      max.block.ms: 5000
+    consumer:
+      bootstrap-servers: pkc-p11xm.us-east-1.aws.confluent.cloud:9092
+      group-id: async-bcp-h2h-v1
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
