@@ -13,7 +13,7 @@ spring:
     name: async-statistic
 
   kafka:
-    bootstrap-servers: pkc-12576z.us-west2.gcp.confluent.cloud:9092
+    bootstrap-servers: ${BOOTSTRAP_SERVERS}
     listener:
       ack-mode: manual_immediate
     topic:
@@ -25,11 +25,10 @@ spring:
       request.timeout.ms: 3000
       security.protocol: SASL_SSL
       retry.backoff.ms: 500
-      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='RFGZR73WZNZIJSWC' password='ZQmuSzW2lQ4WqcUGv7IGrrd7TeNdtvC8LhNWlwEDlLn9gtxySrLj67s5TFYKW+a9';
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='${CLUSTER_API_KEY}' password='${CLUSTER_API_SECRET}';
       max.block.ms: 5000
     consumer:
-      bootstrap-servers: pkc-p11xm.us-east-1.aws.confluent.cloud:9092
-      group-id: async-bcp-h2h-v1
+      group-id: async-statistic
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
@@ -38,3 +37,6 @@ spring:
           json:
             trusted:
               packages: '*'
+
+server:
+  port: 8081
