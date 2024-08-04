@@ -4,7 +4,7 @@ Servicio asincrono que se suscribe al evento para actualizar las estadisticas
 
 ## Configuración local
 
-Para ejecutar la aplicación localmente, se necesita crear la bd y configurar variables de entorno
+Para ejecutar la aplicación localmente, se necesita tener la bd creada y configurar variables de entorno
 
 ### Variables de Entorno
 
@@ -16,3 +16,9 @@ Para ejecutar la aplicación localmente, se necesita crear la bd y configurar va
     - `root`
 - **`DB_PASSWORD`**: La contraseña del usuario para acceder la base de datos.
     - `rootroot`
+- **`BOOTSTRAP_SERVERS`**: Servidor donde se encuentra el topico.
+  - `Se proporciona el dato por interno`
+- **`CLUSTER_API_KEY`**: Api key del cluster.
+  - `Se proporciona el dato por interno`
+- **`CLUSTER_API_SECRET`**: Api secret del cluster.
+  - `Se proporciona el dato por interno`
